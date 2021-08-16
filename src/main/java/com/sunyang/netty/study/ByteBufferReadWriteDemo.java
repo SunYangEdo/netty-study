@@ -16,7 +16,7 @@ public class ByteBufferReadWriteDemo {
         debugAll(buffer);
         buffer.put(new byte[]{98,99,100});// b c d
         debugAll(buffer);
-        System.out.println(buffer.get());
+//        System.out.println(buffer.get());
         buffer.flip();
         System.out.println(buffer.get());
         debugAll(buffer);
