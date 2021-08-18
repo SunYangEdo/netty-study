@@ -16,8 +16,8 @@ public class BIOClientDemo {
         channel.connect(new InetSocketAddress("localhost", 8080));
         // 这一步用debug模式实现  来直观感受阻塞模式
         channel.write(StandardCharsets.UTF_8.encode("0123456789123456hello\nworld\n"));
-        System.in.read();
-//        channel.close();
+//        System.in.read();
+        channel.close();
 //        System.out.println("waiting....");
     }
 }
