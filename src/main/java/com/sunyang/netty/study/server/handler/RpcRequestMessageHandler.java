@@ -37,7 +37,7 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         RpcRequestMessage message = new RpcRequestMessage(
                 1,
-                "com.sunyang.netty.study.server.service.HelloService",
+                "cn.itcast.server.service.HelloService",
                 "sayHello",
                 String.class,
                 new Class[]{String.class},
