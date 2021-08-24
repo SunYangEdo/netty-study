@@ -12,6 +12,9 @@ import java.nio.charset.StandardCharsets;
 public interface Serializer {
 
     // 反序列化方法
+    // Class<T> clazz 反序列化时许需要把字节数组转化成哪个类型的对象
+    //  JDK的反序列化是不需要类型信息的，因为JDK在序列化时也会把类信息放在字节数组里。但是用其他类型的序列化算法时，就必须指定要反序列化的类型。
+    // 反序列化方法
     <T> T deserialize(Class<T> clazz, byte[] bytes);
 
     // 序列化方法

@@ -22,4 +22,5 @@ public class RpcResponseMessage extends Message {
     public int getMessageType() {
         return RPC_MESSAGE_TYPE_RESPONSE;
     }
+
 }

@@ -21,15 +21,14 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
         RpcResponseMessage response = new RpcResponseMessage();
         response.setSequenceId(message.getSequenceId());
         try {
-            HelloService service = (HelloService)
-                    ServicesFactory.getService(Class.forName(message.getInterfaceName()));
+            HelloService service = (HelloService) ServicesFactory.getService(Class.forName(message.getInterfaceName()));
             Method method = service.getClass().getMethod(message.getMethodName(), message.getParameterTypes());
             Object invoke = method.invoke(service, message.getParameterValue());
+            System.out.println(invoke);
             response.setReturnValue(invoke);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            String msg = e.getCause().getMessage();
-            response.setExceptionValue(new Exception("远程调用出错:" + msg));
+            response.setExceptionValue(e);
         }
         ctx.writeAndFlush(response);
     }
@@ -37,16 +36,17 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         RpcRequestMessage message = new RpcRequestMessage(
                 1,
-                "cn.itcast.server.service.HelloService",
+                "com.sunyang.netty.study.server.service.HelloService",
                 "sayHello",
                 String.class,
                 new Class[]{String.class},
                 new Object[]{"张三"}
         );
-        HelloService service = (HelloService)
-                ServicesFactory.getService(Class.forName(message.getInterfaceName()));
+        HelloService service = (HelloService) ServicesFactory.getService(Class.forName(message.getInterfaceName()));
         Method method = service.getClass().getMethod(message.getMethodName(), message.getParameterTypes());
         Object invoke = method.invoke(service, message.getParameterValue());
         System.out.println(invoke);
+
     }
+
 }
