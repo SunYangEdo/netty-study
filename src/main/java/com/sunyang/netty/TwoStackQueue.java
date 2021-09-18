@@ -10,6 +10,7 @@ import java.util.Stack;
  * @create: 2021-08-19 07:34
  **/
 public class TwoStackQueue {
+    // 测试分支修改
     Stack<Integer> A, B;
     public TwoStackQueue() {
         A = new Stack<>();
